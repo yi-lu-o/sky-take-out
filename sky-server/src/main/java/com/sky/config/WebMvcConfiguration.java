@@ -41,6 +41,8 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      * 通过knife4j生成接口文档
      * @return
      */
+
+
     @Bean
     public Docket docket() {
         ApiInfo apiInfo = new ApiInfoBuilder()
@@ -62,7 +64,9 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      * @param registry
      */
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/doc.html").addResourceLocations("classpath:/META-INF/resources/");
-        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+        registry.addResourceHandler("/doc.html").
+                addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/webjars/**").
+                addResourceLocations("classpath:/META-INF/resources/webjars/");
     }
 }
