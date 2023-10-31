@@ -6,3 +6,8 @@ sky:
     database: sky_take_out
     username: root
     password: 14777
+  alioss:
+    endpoint: https://oss-cn-beijing.aliyuncs.com
+    accessKeyId: LTAI5tMA9UmFkFgP5UJCCWc4
+    accessKeySecret: FfRQ6ILXCfF3DGKQBNu1RHWOPrAt8Y
+    bucketName: study-web-001
