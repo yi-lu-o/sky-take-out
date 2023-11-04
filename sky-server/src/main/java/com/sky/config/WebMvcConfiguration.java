@@ -1,6 +1,7 @@
 package com.sky.config;
 
 import com.sky.interceptor.JwtTokenAdminInterceptor;
+import com.sky.interceptor.JwtTokenUserInterceptor;
 import com.sky.json.JacksonObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,8 @@ import java.util.List;
 @Configuration
 @Slf4j
 public class WebMvcConfiguration extends WebMvcConfigurationSupport {
-
+    @Autowired
+    private JwtTokenUserInterceptor jwtTokenUserInterceptor;
     @Autowired
     private JwtTokenAdminInterceptor jwtTokenAdminInterceptor;
 
@@ -35,12 +37,12 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      *
      * @param registry
      */
-    protected void addInterceptors(InterceptorRegistry registry) {
-        log.info("开始注册自定义拦截器...");
-        registry.addInterceptor(jwtTokenAdminInterceptor)
-                .addPathPatterns("/admin/**")
-                .excludePathPatterns("/admin/employee/login");
-    }
+//    protected void addInterceptors(InterceptorRegistry registry) {
+//        log.info("开始注册自定义拦截器...");
+//        registry.addInterceptor(jwtTokenAdminInterceptor)
+//                .addPathPatterns("/admin/**")
+//                .excludePathPatterns("/admin/employee/login");
+//    }
 
     /**
      * 通过knife4j生成接口文档
@@ -86,5 +88,18 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         converter.setObjectMapper(new JacksonObjectMapper());
         //将自己的消息转化器加入容器中
         converters.add(0,converter);
+    }
+    /**
+     * 注册自定义拦截器
+     * @param registry
+     */
+    protected void addInterceptors(InterceptorRegistry registry) {
+        log.info("开始注册自定义拦截器...");
+        //.........
+
+        registry.addInterceptor(jwtTokenUserInterceptor)
+                .addPathPatterns("/user/**")
+                .excludePathPatterns("/user/user/login")
+                .excludePathPatterns("/user/shop/status");
     }
 }
