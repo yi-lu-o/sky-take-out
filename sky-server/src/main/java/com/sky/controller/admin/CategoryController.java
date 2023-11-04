@@ -6,6 +6,7 @@ import com.sky.entity.Category;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.CategoryService;
+import com.sky.service.DishService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +22,8 @@ import java.util.List;
 @Api(tags = "分类相关接口")
 @Slf4j
 public class CategoryController {
-
+    @Autowired
+    private DishService dishService;
     @Autowired
     private CategoryService categoryService;
 
@@ -56,13 +58,23 @@ public class CategoryController {
      * @param id
      * @return
      */
-    @DeleteMapping
-    @ApiOperation("删除分类")
-    public Result<String> deleteById(Long id){
-        log.info("删除分类：{}", id);
-        categoryService.deleteById(id);
-        return Result.success();
-    }
+    /**
+     * 菜品起售停售
+     *
+     * @param status
+     * @param id
+     * @return
+     */
+//    @PostMapping("/status/{status}")
+//    @ApiOperation("菜品起售停售")
+//    public Result<String> startOrStop(@PathVariable Integer status, Long id) {
+//        dishService.startOrStop(status, id);
+//
+//        //将所有的菜品缓存数据清理掉，所有以dish_开头的key
+//        cleanCache("dish_*");
+//
+//        return Result.success();
+//    }
 
     /**
      * 修改分类
