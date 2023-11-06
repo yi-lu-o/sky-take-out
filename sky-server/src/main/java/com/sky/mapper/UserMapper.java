@@ -12,7 +12,7 @@ public interface UserMapper {
      * @param openid
      * @return
      */
-    @Select("select * from user where openid = #{openid}")
+    @Select("select * from sky_take_out.user where openid = #{openid}")
     User getByOpenid(String openid);
 
     /**
@@ -20,4 +20,6 @@ public interface UserMapper {
      * @param user
      */
     void insert(User user);
+    @Select("select * from sky_take_out.user where id = #{id}")
+    User getById(Long id);
 }
